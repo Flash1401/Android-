@@ -1,1 +1,241 @@
+Activity_main.xml 
+
+<?xml version="1.0" encoding="utf-8"?> 
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+
+ xmlns:app="http://schemas.android.com/apk/res-auto" 
+
+ xmlns:tools="http://schemas.android.com/tools" 
+
+ android:layout_width="match_parent" 
+
+ android:layout_height="match_parent" 
+
+ tools:context=".MainActivity"> 
+
+ <TableRow 
+
+ android:layout_height="wrap_content" 
+
+ android:layout_width="wrap_content" 
+
+ android:orientation="horizontal"> 
+
+ <TextView 
+
+ android:layout_width="wrap_content" 
+
+ android:layout_height="wrap_content" 
+
+ android:text="List"/> 
+
+ <EditText 
+
+ android:layout_height="50dp" 
+
+ android:layout_width="200dp" 
+
+ android:id="@+id/l" 
+
+ android:hint="Enter 5 numbers"/> 
+
+ </TableRow> 
+
+ <TableRow 
+
+ android:layout_height="wrap_content" 
+
+ android:layout_width="wrap_content" 
+
+ android:orientation="horizontal"> 
+
+ <Button 
+
+ android:layout_width="wrap_content"
+ 
+ android:layout_height="wrap_content" 
+
+ android:text="Ans" 
+
+ android:id="@+id/ans"/> 
+
+ <EditText 
+
+ android:layout_height="50dp" 
+
+ android:layout_width="200dp" 
+
+ android:id="@+id/et" /> 
+
+ </TableRow> 
+
+ <TableRow 
+
+ android:layout_height="wrap_content" 
+
+ android:layout_width="wrap_content" 
+
+ android:orientation="vertical"> 
+
+ <RadioGroup 
+
+ android:layout_width="wrap_content" 
+
+ android:layout_height="wrap_content" 
+
+ android:id="@+id/rg"> 
+
+ <RadioButton 
+
+ android:layout_width="wrap_content" 
+
+ android:layout_height="wrap_content" 
+
+ android:text="Sum" 
+
+ android:id="@+id/rd1" 
+
+ /> 
+
+ <RadioButton 
+
+ android:layout_width="wrap_content" 
+
+ android:layout_height="wrap_content" 
+
+ android:text="Average" 
+
+ android:id="@+id/rd2" 
+
+ /> 
+
+ </RadioGroup> 
+
+ </TableRow> 
+
+</TableLayout> 
+
+MainActivity.java
+
+package com.example.mysumavg; 
+
+import androidx.appcompat.app.AppCompatActivity; 
+
+import android.os.Bundle; 
+
+import android.util.Log; 
+
+import android.view.View; 
+
+import android.widget.Button; 
+
+import android.widget.EditText; 
+
+import android.widget.RadioGroup; 
+
+import android.widget.Toast; 
+
+public class MainActivity extends AppCompatActivity { 
+
+ RadioGroup rg; 
+
+ Button ans; 
+
+ EditText l, et; 
+
+ @Override 
+
+ protected void onCreate(Bundle savedInstanceState) { 
+
+ super.onCreate(savedInstanceState); 
+
+ setContentView(R.layout.activity_main); 
+
+ rg=(RadioGroup)findViewById(R.id.rg); 
+
+ ans=(Button) findViewById(R.id.ans); 
+
+ et = (EditText) findViewById(R.id.et); 
+
+ ans.setOnClickListener(new View.OnClickListener() { 
+
+ @Override 
+
+ public void onClick(View view) { 
+
+ l= (EditText) findViewById(R.id.l); 
+
+ String str = l.getText().toString(); 
+
+ String[] arr = str.split(","); 
+
+ int id = rg.getCheckedRadioButtonId(); 
+
+ switch (id){ 
+
+ case R.id.rd1:int sum=0; 
+
+ try{
+ 
+ for (int i=0; i<arr.length; i++){ 
+
+ sum+= Integer.parseInt(arr[i]); 
+
+ et.setText("Sum="+sum); 
+
+ } 
+
+ } 
+
+ catch (NumberFormatException ne){ 
+
+ Log.e("Except", "NE except"); 
+
+ } 
+
+ break; 
+
+ case R.id.rd2: float avg; 
+
+ sum=0; 
+
+ try{ 
+
+ for (int i=0; i<arr.length; i++){ 
+
+ sum+= Integer.parseInt(arr[i]); 
+
+ } 
+
+ avg=sum/arr.length; 
+
+ et.setText("Average="+avg); 
+
+ } 
+
+ catch (NumberFormatException ne){ 
+
+ Log.e("Except", "NE except"); 
+
+ } 
+
+ break; 
+
+ default: 
+
+ Toast.makeText(MainActivity.this, "Please select radio button", 
+
+Toast.LENGTH_SHORT).show(); 
+
+ } 
+
+ } 
+
+ }); 
+
+ } 
+
+}
+
 
