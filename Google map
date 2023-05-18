@@ -1,0 +1,129 @@
+Create an Android Application to display satellite view of current location using 
+
+Google Map. 
+
+MainActivity.java 
+
+package com.example.mygooglemap; 
+
+import androidx.fragment.app.FragmentActivity; 
+
+import android.os.Bundle; 
+
+import com.google.android.gms.maps.CameraUpdateFactory; 
+
+import com.google.android.gms.maps.GoogleMap; 
+
+import com.google.android.gms.maps.OnMapReadyCallback; 
+
+import com.google.android.gms.maps.SupportMapFragment; 
+
+import com.google.android.gms.maps.model.LatLng; 
+
+import com.google.android.gms.maps.model.MarkerOptions; 
+
+import com.example.mygooglemap.databinding.ActivityMapsBinding; 
+
+public class MapsActivity extends FragmentActivity implements 
+
+OnMapReadyCallback { 
+
+ private GoogleMap mMap; 
+
+ private ActivityMapsBinding binding; 
+
+ @Override 
+
+ protected void onCreate(Bundle savedInstanceState) { 
+
+ super.onCreate(savedInstanceState); 
+
+ binding = ActivityMapsBinding.inflate(getLayoutInflater()); 
+
+ setContentView(binding.getRoot()); 
+
+ // Obtain the SupportMapFragment and get notified when the map is ready 
+
+to be used. 
+
+ SupportMapFragment mapFragment = (SupportMapFragment) 
+
+getSupportFragmentManager() 
+
+ .findFragmentById(R.id.map); 
+
+ mapFragment.getMapAsync(this); 
+
+ }
+ 
+ @Override 
+
+ public void onMapReady(GoogleMap googleMap) { 
+
+ mMap = googleMap; 
+
+ // Add a marker in Sydney and move the camera 
+
+ LatLng sydney = new LatLng(-34, 151); 
+
+ mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in 
+
+Sydney")); 
+
+ mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney)); 
+
+ mMap.setMapType(mMap.MAP_TYPE_SATELLITE); 
+
+ } 
+
+}
+
+AndroidManifest.xml 
+
+<?xml version="1.0" encoding="utf-8"?> 
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" 
+
+ package="com.example.mygooglemap"> 
+
+ <application 
+
+ android:allowBackup="true" 
+
+ android:icon="@mipmap/ic_launcher" 
+
+ android:label="@string/app_name" 
+
+ android:roundIcon="@mipmap/ic_launcher_round" 
+
+ android:supportsRtl="true" 
+
+ android:theme="@style/Theme.MyGoogleMap">
+ 
+ <meta-data 
+
+ android:name="com.google.android.geo.API_KEY" 
+
+ android:value="MAPS_API_KEY" /> 
+
+ <activity 
+
+ android:name=".MapsActivity" 
+
+ android:exported="true" 
+
+ android:label="@string/title_activity_maps"> 
+
+ <intent-filter> 
+
+ <action android:name="android.intent.action.MAIN" /> 
+
+ <category android:name="android.intent.category.LAUNCHER" /> 
+
+ </intent-filter> 
+
+ </activity> 
+
+ </application> 
+
+</manifest>
