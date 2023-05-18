@@ -1,3 +1,5 @@
+Construct an Android Application to display the images using ImageSwitcher.
+
 Activity_main.xml 
 
 <?xml version="1.0" encoding="utf-8"?> 
